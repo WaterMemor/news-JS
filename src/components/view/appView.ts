@@ -1,12 +1,28 @@
 import News from './news/news';
 import Sources from './sources/sources';
 
-interface NewsData {
-    articles: any[];
+export interface Article {
+    title: string;
+    description: string;
+    author: string;
+    urlToImage?: string;
+    publishedAt: string;
+    source: { name: string };
+    url: string;
 }
-interface SourceData {
-    sources: any[];
+export interface NewsData {
+    articles: Article[];
 }
+
+export interface Source {
+    id: string;
+    name: string;
+    url: string;
+}
+export interface SourceData {
+    sources: Source[];
+}
+
 export class AppView {
     private news: News;
     private sources: Sources;
@@ -17,13 +33,13 @@ export class AppView {
     }
 
     drawNews(data: NewsData): void {
-        const values = data?.articles || [];
-        this.news.draw(values);
+        if (!data || !data.articles || data.articles.length === 0) return;
+        this.news.draw(data.articles);
     }
 
     drawSources(data: SourceData): void {
-        const values = data?.sources || [];
-        this.sources.draw(values);
+        if (!data || !data.sources || data.sources.length === 0) return;
+        this.sources.draw(data.sources);
     }
 }
 

@@ -1,7 +1,8 @@
 import './sources.css';
+import { Source } from '../appView';
 
 class Sources {
-    draw(data: any[]):void {
+    draw(data: Source[]):void {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement | null;
         if (!sourceItemTemp) {
